@@ -1,7 +1,9 @@
-import { Table } from 'antd'
+import { message, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { BsArrowDownShort, BsArrowUpShort } from "react-icons/bs"
-
+import { get } from "../../../api/axios"
+import URL from "../../../api/config"
+import CreateApp from "../modal/CreateApp"
 /*eslint-disable */
 
 const columns = [
@@ -30,20 +32,24 @@ const columns = [
             <p style={{ color: "#ff4d4f", fontWeight: "bold", margin: "0" }} className='text-[#ff4d4f]  font-bold m-0'>{text}</p>
             <BsArrowDownShort style={{ fontSize: "2rem", color: "#ff4d4f" }} className='text-[2rem] text-[#ff4d4f]' />
         </div>,
-    },
+    }
 ];
-
 
 const onChange = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
 };
 
+
 const TableVUI = (props) => {
+    const [show, setShow] = useState(false)
+    const [data, setData] = useState([])
+    const [selected, setSelected] = useState({})
+    const [selectedData, setSelectedData] = useState([])
     const renderDate = (date) => {
         if (props.type === "week") {
             return date
         } else if (props.type === "day") {
-            return props.day + " " + date + ":00"
+            return props.day + " " + date + "h"
         } else if (props.type === "hour") {
             return props.day + " " + props.hour + ":" + date
         } else {
@@ -51,8 +57,36 @@ const TableVUI = (props) => {
             return a.getDate() + "/" + (a.getMonth() + 1) + "/" + a.getFullYear() + " " + a.getHours() + ":" + a.getMinutes() + ":" + a.getSeconds()
         }
     }
+    const onRowClick = (record) => {
+        const splitRecord = record.date.split(" ");
+        setShow(true)
+        setSelected(record)
+        if (splitRecord.length === 1) {
+            // Day
+            get(URL.URL_GET_TRANSACTIOM + `?options=day&day=${splitRecord[0]}`).then(res => {
+                console.log(res.data);
+                setSelectedData(res.data.result)
+            }).catch(err => {
+                message.error(err.message)
+            })
+        } else if (splitRecord[1].includes("h")) {
+            // Hour
+            get(URL.URL_GET_TRANSACTIOM + `?options=hour&day=${splitRecord[0]}&hour=${splitRecord[1].split(0, splitRecord[1].length - 2)}`).then(res => {
+                setSelectedData(res.data.result)
+            }).catch(err => {
+                message.error(err.message)
+            })
+        } else {
+            // Minutes
+            const splitTime = splitRecord[1].split(":")
+            get(URL.URL_GET_TRANSACTIOM + `?options=minute&day=${splitRecord[0]}&hour=${splitTime[0]}&minute=${splitTime[1]}`).then(res => {
+                setSelectedData(res.data.result)
+            }).catch(err => {
+                message.error(err.message)
+            })
+        }
+    }
 
-    const [data, setData] = useState([])
     useEffect(() => {
         console.log(data)
         if (data?.length !== 0) {
@@ -78,7 +112,19 @@ const TableVUI = (props) => {
         }
     }, [props.categories, props.using, props.giving, data?.length])
     return (
-        <Table columns={columns} dataSource={data} onChange={onChange} />
+        <>
+            <CreateApp show={show} setShow={setShow} selected={selected} selectedData={selectedData}></CreateApp>
+            <Table
+                columns={columns}
+                dataSource={data}
+                onRow={(record, rowIndex) => {
+                    return {
+                        onClick: () => onRowClick(record), // click row
+                    };
+                }}
+                onChange={onChange}
+            />
+        </>
     )
 }
 export default TableVUI;
