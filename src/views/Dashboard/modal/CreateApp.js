@@ -16,6 +16,9 @@ const columns = [
     title: 'STT',
     dataIndex: 'stt',
     key: 'stt',
+    sorter: {
+      compare: (a, b) => a.stt - b.stt
+    },
     render: (text) => <div style={{ fontWeight: "600", fontSize: '14px' }}>{text}</div>
   },
   {
@@ -43,6 +46,9 @@ const columns = [
     title: 'VUI',
     dataIndex: 'value',
     key: 'value',
+    sorter: {
+      compare: (a, b) => a.value.value - b.value.value
+    },
     render: (text) => <div style={{ fontWeight: "500", fontSize: "18px", color: text.status === "REDEEM" ? "#a0d911" : "#f5222d" }}>{text.status === "REDEEM" ? "+" : "-"} ${text.value}</div>
   }
 ]

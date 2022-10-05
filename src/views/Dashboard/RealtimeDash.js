@@ -96,7 +96,6 @@ export default function RealtimeDash() {
         }
     ]
 
-
     const state = {
         series,
         options: {
@@ -174,7 +173,16 @@ export default function RealtimeDash() {
             },
             xaxis: {
                 type: "datetime",
-                categories
+                categories,
+                // axisBorder: {
+                //     show: true
+                // },
+                // axisTicks: {
+                //     show: true
+                // },
+                labels: {
+                    datetimeUTC: false,
+                },
             },
             tooltip: {
                 enabled: true,

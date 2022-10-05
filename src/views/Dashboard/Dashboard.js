@@ -140,7 +140,7 @@ export default function Dashboard() {
             markers: {
                 strokeWidth: 7,
                 strokeOpacity: 1,
-                strokeColors: ['#fff'],
+                // strokeColors: ['#fff'],
                 colors: ["#a0d911", "#ff4d4f"]
             },
             annotations: {
