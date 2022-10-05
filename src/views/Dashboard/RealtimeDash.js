@@ -13,11 +13,16 @@ import {
 } from "reactstrap"
 import BalanceVUI from "./components/BalanceVUI"
 import URL from "../../api/config"
+import { Select } from "antd"
+
+const Option = Select.Option
 /*eslint-disable */
 import { get } from "../../api/axios"
 const host = "http://localhost:5050"
 
 export default function RealtimeDash() {
+    const arr = new Array(168).fill(0)
+    const [option, setOption] = useState(8)
     const socketRef = useRef()
     useEffect(() => {
         // Connect socket
@@ -64,7 +69,7 @@ export default function RealtimeDash() {
 
     useEffect(() => {
         const getAllData = () => {
-            get(URL.URL_GET_ALL_DATA)
+            get(URL.URL_GET_ALL_DATA + `?time=${option}`)
                 .then((res) => {
                     setCategories(res.data.arrCate)
                     setSeries2(res.data.Giving)
@@ -75,7 +80,7 @@ export default function RealtimeDash() {
                 })
         }
         getAllData()
-    }, [])
+    }, [option])
 
     const [series1, setSeries1] = useState([])
     const [series2, setSeries2] = useState([])
@@ -90,6 +95,7 @@ export default function RealtimeDash() {
             data: series2
         }
     ]
+
 
     const state = {
         series,
@@ -196,81 +202,7 @@ export default function RealtimeDash() {
                         )
                     }
                 }
-            },
-            // responsive: [
-            //     {
-            //         breakpoint: 1400,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 1000
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 1300,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 900
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 1200,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 800
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 1100,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 700
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 1000,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 600
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 900,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 500
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 700,
-            //         options: {
-            //             chart: {
-            //                 height: 300,
-            //                 width: 400
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 500,
-            //         options: {
-            //             chart: {
-            //                 height: 200,
-            //                 width: 200
-            //             }
-            //         }
-            //     }
-            // ]
+            }
         }
     }
 
@@ -283,6 +215,19 @@ export default function RealtimeDash() {
                         <CardTitle>Kick start your project 🚀</CardTitle>
                     </CardHeader>
                     <CardBody>
+                        <Select
+                            onChange={(value) => { setOption(value) }}
+                            value={option}
+                            style={{
+                                width: 240
+                            }}
+                        >
+                            {
+                                arr.map((value, index) => {
+                                    return <Option value={index + 1} key={index}>{index + 1}</Option>
+                                })
+                            }
+                        </Select>
                         <ReactApexChart
                             options={state.options}
                             series={state.series}

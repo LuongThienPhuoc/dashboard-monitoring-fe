@@ -96,7 +96,7 @@ export default function BrandCodeDash() {
                     .then(res => {
                         setSeries1(res.data.vuiSpending)
                         setSeries2(res.data.vuiGiving)
-                        setCategories(res.data.arrCate)
+                        setCategories(res.data.hourArray)
                     })
                     .catch(err => {
                         message.error(err.message)
