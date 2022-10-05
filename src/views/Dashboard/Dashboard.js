@@ -14,6 +14,8 @@ import TableVUI from './components/TableVUI'
 import { get } from "../../api/axios"
 import URL from "../../api/config"
 import BalanceVUI from './components/BalanceVUI'
+const Option = Select.Option
+
 export default function Dashboard() {
     const [option1, setOption1] = useState("week")
     const [option2, setOption2] = useState("all")
@@ -70,8 +72,9 @@ export default function Dashboard() {
     const renderDay = async () => {
         const response = await get(URL.URL_GET_DATA_DAY + `?day=${option1}`)
         const arr = new Array(24).fill(0)
-        setSeries1(response.data.vuiSpending)
-        setSeries2(response.data.vuiGiving)
+        console.log(response)
+        // setSeries1(response.data.vuiSpending)
+        // setSeries2(response.vuiGiving)
         const cate = arr.map((value, key) => {
             return key
         })
@@ -83,8 +86,8 @@ export default function Dashboard() {
             URL.URL_GET_DATA_HOURS + `?day=${option1}&hour=${option2}`
         )
         const arr = new Array(60).fill(0)
-        setSeries1(response.data.vuiSpending)
-        setSeries2(response.data.vuiGiving)
+        setSeries1(response.vuiSpending)
+        setSeries2(response.vuiGiving)
         const cate = arr.map((value, key) => {
             return key
         })
@@ -115,6 +118,7 @@ export default function Dashboard() {
             data: series2
         }
     ]
+
     const state = {
         series,
         options: {
@@ -217,80 +221,6 @@ export default function Dashboard() {
                     }
                 }
             },
-            // responsive: [
-            //     {
-            //         breakpoint: 1400,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 1000
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 1300,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 900
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 1200,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 800
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 1100,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 700
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 1000,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 600
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 900,
-            //         options: {
-            //             chart: {
-            //                 height: 500,
-            //                 width: 500
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 700,
-            //         options: {
-            //             chart: {
-            //                 height: 300,
-            //                 width: 400
-            //             }
-            //         }
-            //     },
-            //     {
-            //         breakpoint: 500,
-            //         options: {
-            //             chart: {
-            //                 height: 200,
-            //                 width: 200
-            //             }
-            //         }
-            //     }
-            // ]
         }
     }
 
@@ -332,7 +262,7 @@ export default function Dashboard() {
                                 >
                                     <Option value="all">All</Option>
                                     {arr.map((value, key) => (
-                                        <Option value={key}>{key}</Option>
+                                        <Option key={key} value={key}>{key}</Option>
                                     ))}
                                 </Select>
                             </div>

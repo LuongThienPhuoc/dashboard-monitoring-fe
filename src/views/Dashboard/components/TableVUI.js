@@ -36,7 +36,6 @@ const columns = [
 ];
 
 const onChange = (pagination, filters, sorter, extra) => {
-    console.log('params', pagination, filters, sorter, extra);
 };
 
 
@@ -64,7 +63,6 @@ const TableVUI = (props) => {
         if (splitRecord.length === 1) {
             // Day
             get(URL.URL_GET_TRANSACTIOM + `?options=day&day=${splitRecord[0]}`).then(res => {
-                console.log(res.data);
                 setSelectedData(res.data.result)
             }).catch(err => {
                 message.error(err.message)
@@ -88,7 +86,6 @@ const TableVUI = (props) => {
     }
 
     useEffect(() => {
-        console.log(data)
         if (data?.length !== 0) {
             setData(props.categories?.map((value, key) => {
                 return {

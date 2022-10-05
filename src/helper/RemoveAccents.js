@@ -1,6 +1,5 @@
 
 const RemoveAccents = (string) => {
-    console.log(string)
     let str = string.toLowerCase().replace(/ /g, '')
     var AccentsMap = [
         "aàảãáạăằẳẵắặâầẩẫấậ",

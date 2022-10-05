@@ -1,6 +1,8 @@
 // ** React Imports
 import { Fragment, useState, useEffect } from 'react'
 import { BiLineChartDown, BiLineChart } from "react-icons/bi"
+import { MdMiscellaneousServices, MdBrandingWatermark } from "react-icons/md"
+import { FaStore } from "react-icons/fa"
 // ** Reactstrap Imports
 import {
   Modal,
@@ -80,13 +82,29 @@ const ShareProjectExample = (props) => {
             columns={columns}
             expandable={{
               expandedRowRender: (record) => (
-                <p
-                  style={{
-                    margin: 0
-                  }}
-                >
-                  {record.date}
-                </p>
+                <div style={{ paddingLeft: "50px" }}>
+                  <div style={{ display: "flex", justifyContent: "start", alignItems: "center", fontSize: "16px", marginBottom: "15px" }}>
+                    <p style={{ margin: "0", padding: "10px", borderRadius: "4px", color: "#7367f0", background: "rgb(115 103 240 / 20%)", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "20px" }}>
+                      <FaStore></FaStore>
+                    </p>
+                    <p style={{ margin: "0", marginLeft: "10px", fontWeight: "600", width: "60px" }}>Store: </p>
+                    <p style={{ margin: "0" }}>{record.data.storeCode ? record.data.storeCode : "Không có"}</p>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "start", alignItems: "center", fontSize: "16px", marginBottom: "15px" }}>
+                    <p style={{ margin: "0", padding: "10px", borderRadius: "4px", color: "#ff9f43", background: "rgb(255 159 67 / 20%)", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "20px" }}>
+                      <MdMiscellaneousServices></MdMiscellaneousServices>
+                    </p>
+                    <p style={{ margin: "0", marginLeft: "10px", fontWeight: "600", width: "60px" }}>Service: </p>
+                    <p style={{ margin: "0" }}>{record.data.service ? record.data.service : "Không có"}</p>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "start", alignItems: "center", fontSize: "16px", marginBottom: "15px" }}>
+                    <p style={{ margin: "0", padding: "10px", borderRadius: "4px", color: "#00cfe8", background: "rgb(0 207 232 / 20%)", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "20px" }}>
+                      <MdBrandingWatermark></MdBrandingWatermark>
+                    </p>
+                    <p style={{ margin: "0", marginLeft: "10px", fontWeight: "600", width: "60px" }}>Brand: </p>
+                    <p style={{ margin: "0" }}>{record.data.brandCode ? record.data.brandCode : "Không có"}</p>
+                  </div>
+                </div>
               ),
               rowExpandable: (record) => record.name !== 'Not Expandable'
             }}

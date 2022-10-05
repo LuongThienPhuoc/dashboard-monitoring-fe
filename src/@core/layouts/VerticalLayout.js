@@ -132,8 +132,7 @@ const VerticalLayout = (props) => {
   return (
     <div
       className={classnames(
-        `wrapper vertical-layout ${
-          navbarWrapperClasses[navbarType] || "navbar-floating"
+        `wrapper vertical-layout ${navbarWrapperClasses[navbarType] || "navbar-floating"
         } ${footerClasses[footerType] || "footer-static"}`,
         {
           // Modern Menu
@@ -165,11 +164,11 @@ const VerticalLayout = (props) => {
         expand="lg"
         container={false}
         light={skin !== "dark"}
+        style={{ background: "#f7cc15" }}
         dark={skin === "dark" || bgColorCondition}
         color={bgColorCondition ? navbarColor : undefined}
         className={classnames(
-          `header-navbar navbar align-items-center ${
-            navbarClasses[navbarType] || "floating-nav"
+          `header-navbar navbar align-items-center ${navbarClasses[navbarType] || "floating-nav"
           } navbar-shadow`
         )}
       >

@@ -114,8 +114,7 @@ const HorizontalLayout = (props) => {
   return (
     <div
       className={classnames(
-        `wrapper horizontal-layout horizontal-menu ${
-          navbarWrapperClasses[navbarType] || "navbar-floating"
+        `wrapper horizontal-layout horizontal-menu ${navbarWrapperClasses[navbarType] || "navbar-floating"
         } ${footerClasses[footerType] || "footer-static"} menu-expanded`
       )}
       {...(isHidden ? { "data-col": "1-column" } : {})}
@@ -123,6 +122,7 @@ const HorizontalLayout = (props) => {
       <Navbar
         expand="lg"
         container={false}
+        style={{ background: "#f7cc15" }}
         className={classnames(
           "header-navbar navbar-fixed align-items-center navbar-shadow navbar-brand-center",
           {

@@ -157,9 +157,7 @@ const MergeLayoutRoutes = (layout, defaultLayout) => {
           )
         }
         const isLogin = useSelector(state => state.authen.isLogin)
-        console.log(isLogin)
         // Push route to LayoutRoutes
-        console.log(route)
         if (isLogin && route.isLogin) {
           LayoutRoutes.push(route)
         }

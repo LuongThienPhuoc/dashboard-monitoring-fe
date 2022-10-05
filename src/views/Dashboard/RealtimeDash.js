@@ -29,8 +29,6 @@ export default function RealtimeDash() {
             let now = new Date().getTime() - 1000 * 60
             let now1 = new Date(now)
             let last = new Date(categories[categories.length - 1])
-            console.log("now", now)
-            console.log("last", last)
 
             if (
                 now1.getSeconds() === last.getSeconds() &&
@@ -46,8 +44,6 @@ export default function RealtimeDash() {
                     return [...prev]
                 })
             } else {
-                console.log(false)
-                console.log(data)
                 setSeries1((prev) => {
                     return [...prev.slice(0), data.vuiSpending]
                 })

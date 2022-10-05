@@ -13,6 +13,8 @@ import URL from "../../api/config"
 import ReactApexChart from "react-apexcharts"
 import BalanceVUI from './components/BalanceVUI'
 import TableVUI from './components/TableVUI'
+const Option = Select.Option
+
 /*eslint-disable */
 export default function BrandCodeDash() {
     const [option1, setOption1] = useState("week")
@@ -315,7 +317,7 @@ export default function BrandCodeDash() {
                                 >
                                     <Option value="all">All</Option>
                                     {arr.map((value, key) => (
-                                        <Option value={key}>{key}</Option>
+                                        <Option key={key} value={key}>{key}</Option>
                                     ))}
                                 </Select>
                             </div>
