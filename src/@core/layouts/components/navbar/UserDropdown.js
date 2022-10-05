@@ -25,11 +25,13 @@ import {
 } from "reactstrap"
 
 // ** Default Avatar Image
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { handleLogout } from "../../../../redux/authen"
 const UserDropdown = () => {
   const dispatch = useDispatch()
-
+  const skin = useSelector(state => state.layout.skin)
+  console.log(34)
+  console.log(skin)
   return (
     <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
       <DropdownToggle
@@ -39,7 +41,7 @@ const UserDropdown = () => {
         onClick={(e) => e.preventDefault()}
       >
         <div className="user-nav d-sm-flex d-none">
-          <span className="user-name fw-bold">Admin</span>
+          <span style={{ color: skin === "dark" ? "white" : "#6e6b7b" }} className="user-name fw-bold">Admin</span>
         </div>
         <Avatar
           img={'https://taptap.com.vn/wp-content/uploads/2021/11/1-1.png'}

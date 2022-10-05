@@ -17,7 +17,7 @@ const ThemeNavbar = (props) => {
   // ** Function to toggle Theme (Light/Dark)
   const ThemeToggler = () => {
     if (skin === "dark") {
-      return <Sun className="ficon" onClick={() => setSkin("semi-dark")} />
+      return <Sun className="ficon" style={{ color: "black" }} onClick={() => setSkin("semi-dark")} />
     } else {
       return <Moon className="ficon" onClick={() => setSkin("dark")} />
     }

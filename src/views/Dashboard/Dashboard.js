@@ -14,9 +14,11 @@ import TableVUI from './components/TableVUI'
 import { get } from "../../api/axios"
 import URL from "../../api/config"
 import BalanceVUI from './components/BalanceVUI'
+import { useSelector } from 'react-redux'
 const Option = Select.Option
 
 export default function Dashboard() {
+    const skin = useSelector(state => state.layout.skin)
     const [option1, setOption1] = useState("week")
     const [option2, setOption2] = useState("all")
     const [dayOfWeek, setDayOfWeek] = useState([])
@@ -133,14 +135,9 @@ export default function Dashboard() {
             dataLabels: {
                 enabled: false
             },
-            // markers: {
-            //     size: 0,
-            //     style: "hollow",
-            // },
             markers: {
-                strokeWidth: 7,
-                strokeOpacity: 1,
-                // strokeColors: ['#fff'],
+                strokeWidth: 1,
+                strokeOpacity: 7,
                 colors: ["#a0d911", "#ff4d4f"]
             },
             annotations: {
@@ -153,7 +150,8 @@ export default function Dashboard() {
                             text: "Time",
                             style: {
                                 color: "#fff",
-                                background: "#00E396"
+                                background: "#00E396",
+                                fontSize: "16px"
                             }
                         }
                     }
@@ -167,7 +165,8 @@ export default function Dashboard() {
                             text: "VUI",
                             style: {
                                 color: "#fff",
-                                background: "#775DD0"
+                                background: "#775DD0",
+                                fontSize: "16px"
                             }
                         }
                     }
@@ -175,7 +174,13 @@ export default function Dashboard() {
             },
             title: {
                 text: "VUI Chart",
-                align: "left"
+                align: "left",
+                style: {
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    fontFamily: undefined,
+                    color: 'white'
+                },
             },
             stroke: {
                 curve: "smooth"
@@ -193,11 +198,36 @@ export default function Dashboard() {
             colors: ["#a0d911", "#ff4d4f"],
             yaxis: {
                 title: {
-                    text: "Vui"
+                    text: "Vui",
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        fontFamily: undefined,
+                        color: skin === "dark" ? "white" : "black"
+                    },
+                },
+                labels: {
+                    style: {
+                        colors: skin === "dark" ? "white" : "black",
+                        fontSize: '13px',
+                        fontFamily: 'Helvetica, Arial, sans-serif',
+                        fontWeight: 600,
+                        cssClass: 'apexcharts-xaxis-label',
+                    },
                 }
             },
             xaxis: {
-                categories
+                categories,
+                position: 'bottom',
+                labels: {
+                    style: {
+                        colors: skin === "dark" ? "white" : "black",
+                        fontSize: '13px',
+                        fontFamily: 'Helvetica, Arial, sans-serif',
+                        fontWeight: 600,
+                        cssClass: 'apexcharts-xaxis-label',
+                    },
+                }
             },
             tooltip: {
                 enabled: true,
@@ -218,7 +248,14 @@ export default function Dashboard() {
                             return `${option1} ${option2}:${value}`
                         }
                     }
-                }
+                },
+                style: {
+                    colors: skin === "dark" ? "white" : "black",
+                    fontSize: '13px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    fontWeight: 600,
+                    cssClass: 'apexcharts-xaxis-label',
+                },
             },
         }
     }

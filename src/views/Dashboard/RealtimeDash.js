@@ -18,9 +18,11 @@ import { Select } from "antd"
 const Option = Select.Option
 /*eslint-disable */
 import { get } from "../../api/axios"
+import { useSelector } from "react-redux"
 const host = "http://localhost:5050"
 
 export default function RealtimeDash() {
+    const skin = useSelector(state => state.layout.skin)
     const arr = new Array(168).fill(0)
     const [option, setOption] = useState(8)
     const socketRef = useRef()
@@ -115,8 +117,9 @@ export default function RealtimeDash() {
                 enabled: false
             },
             markers: {
-                size: 0,
-                style: "hollow"
+                strokeWidth: 1,
+                strokeOpacity: 7,
+                colors: ["#a0d911", "#ff4d4f"]
             },
             annotations: {
                 yaxis: [
@@ -128,7 +131,8 @@ export default function RealtimeDash() {
                             text: "Time",
                             style: {
                                 color: "#fff",
-                                background: "#00E396"
+                                background: "#00E396",
+                                fontSize: "16px"
                             }
                         }
                     }
@@ -142,7 +146,8 @@ export default function RealtimeDash() {
                             text: "VUI",
                             style: {
                                 color: "#fff",
-                                background: "#775DD0"
+                                background: "#775DD0",
+                                fontSize: "16px"
                             }
                         }
                     }
@@ -150,7 +155,13 @@ export default function RealtimeDash() {
             },
             title: {
                 text: "VUI Chart",
-                align: "left"
+                align: "left",
+                style: {
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    fontFamily: undefined,
+                    color: 'white'
+                },
             },
             stroke: {
                 curve: "smooth"
@@ -168,20 +179,37 @@ export default function RealtimeDash() {
             colors: ["#a0d911", "#ff4d4f"],
             yaxis: {
                 title: {
-                    text: "Vui"
+                    text: "Vui",
+                    style: {
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        fontFamily: undefined,
+                        color: skin === "dark" ? "white" : "black"
+                    },
+                },
+                labels: {
+                    style: {
+                        colors: skin === "dark" ? "white" : "black",
+                        fontSize: '13px',
+                        fontFamily: 'Helvetica, Arial, sans-serif',
+                        fontWeight: 600,
+                        cssClass: 'apexcharts-xaxis-label',
+                    },
                 }
             },
             xaxis: {
                 type: "datetime",
                 categories,
-                // axisBorder: {
-                //     show: true
-                // },
-                // axisTicks: {
-                //     show: true
-                // },
+
                 labels: {
                     datetimeUTC: false,
+                    style: {
+                        colors: skin === "dark" ? "white" : "black",
+                        fontSize: '13px',
+                        fontFamily: 'Helvetica, Arial, sans-serif',
+                        fontWeight: 600,
+                        cssClass: 'apexcharts-xaxis-label',
+                    },
                 },
             },
             tooltip: {
@@ -209,7 +237,14 @@ export default function RealtimeDash() {
                             date.getSeconds()
                         )
                     }
-                }
+                },
+                style: {
+                    colors: skin === "dark" ? "white" : "black",
+                    fontSize: '13px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    fontWeight: 600,
+                    cssClass: 'apexcharts-xaxis-label',
+                },
             }
         }
     }
