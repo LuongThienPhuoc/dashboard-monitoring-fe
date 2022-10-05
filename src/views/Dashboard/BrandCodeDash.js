@@ -244,6 +244,14 @@ export default function BrandCodeDash() {
                     },
                 }
             },
+            legend: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: undefined,
+                labels: {
+                    useSeriesColors: true
+                }
+            },
             tooltip: {
                 enabled: true,
                 shared: true,

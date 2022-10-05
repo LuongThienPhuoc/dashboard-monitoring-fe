@@ -24,7 +24,7 @@ const getLayout = {
 }
 
 // ** Document title
-const TemplateTitle = "%s - Vuexy React Admin Template"
+const TemplateTitle = "%s - TAPTAP React Admin Template"
 
 // ** Default Route
 const DefaultRoute = "/dashboards/dashboard"

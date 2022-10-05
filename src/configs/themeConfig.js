@@ -3,8 +3,8 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: "Vuexy",
-    appLogoImage: require("@src/assets/images/logo/logo.svg").default
+    appName: "",
+    appLogoImage: require("@src/assets/images/logo/taptap-logo.svg").default
   },
   layout: {
     isRTL: false,

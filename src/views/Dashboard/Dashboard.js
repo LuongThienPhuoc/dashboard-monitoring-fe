@@ -140,6 +140,14 @@ export default function Dashboard() {
                 strokeOpacity: 7,
                 colors: ["#a0d911", "#ff4d4f"]
             },
+            legend: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: undefined,
+                labels: {
+                    useSeriesColors: true
+                }
+            },
             annotations: {
                 yaxis: [
                     {

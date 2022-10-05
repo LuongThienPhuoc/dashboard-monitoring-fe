@@ -8,7 +8,7 @@ import { Button } from "reactstrap"
 import { useSkin } from "@hooks/useSkin"
 
 // ** Utils
-import {} from "@utils"
+import { } from "@utils"
 
 // ** Styles
 import "@styles/base/pages/page-misc.scss"
@@ -18,7 +18,7 @@ const NotAuthorized = () => {
   const { skin } = useSkin()
 
   const illustration =
-      skin === "dark" ? "not-authorized-dark.svg" : "not-authorized.svg",
+    skin === "dark" ? "not-authorized-dark.svg" : "not-authorized.svg",
     source = require(`@src/assets/images/pages/${illustration}`).default
   return (
     <div className="misc-wrapper">
@@ -89,7 +89,7 @@ const NotAuthorized = () => {
             </g>
           </g>
         </svg>
-        <h2 className="brand-text text-primary ms-1">Vuexy</h2>
+        <h2 className="brand-text text-primary ms-1">TAPTAP</h2>
       </Link>
       <div className="misc-inner p-2 p-sm-3">
         <div className="w-100 text-center">

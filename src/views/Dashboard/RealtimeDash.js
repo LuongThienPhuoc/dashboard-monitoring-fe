@@ -176,6 +176,14 @@ export default function RealtimeDash() {
                     stops: [0, 90, 100]
                 }
             },
+            legend: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: undefined,
+                labels: {
+                    useSeriesColors: true
+                }
+            },
             colors: ["#a0d911", "#ff4d4f"],
             yaxis: {
                 title: {
