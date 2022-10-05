@@ -7,6 +7,8 @@ import {
     Row,
     Col
 } from "reactstrap"
+/*eslint-disable */
+
 import { message, Select } from "antd"
 import { get } from "../../api/axios"
 import URL from "../../api/config"
@@ -14,9 +16,7 @@ import ReactApexChart from "react-apexcharts"
 import BalanceVUI from './components/BalanceVUI'
 import TableVUI from './components/TableVUI'
 import { useSelector } from 'react-redux'
-const Option = Select.Option
 
-/*eslint-disable */
 export default function BrandCodeDash() {
     const skin = useSelector(state => state.layout.skin)
     const [option1, setOption1] = useState("week")
@@ -37,6 +37,7 @@ export default function BrandCodeDash() {
     const handleChange1 = (value) => {
         setOption2(value)
     }
+
     useEffect(() => {
         const currentDay = new Date()
         const days = []
@@ -52,8 +53,27 @@ export default function BrandCodeDash() {
             )
         }
         setDayOfWeek(days)
-    }, [])
 
+        // const fetApi = async () => {
+        //     await get(URL.URL_GET_DATA_STORE + `?type=service`).then(res => {
+        //         setListService(res.data.result)
+        //     }).catch(err => {
+        //         message.error(err.message)
+        //     })
+        //     await get(URL.URL_GET_DATA_STORE + `?type=storeCode`).then(res => {
+        //         setListStore(res.data.result)
+        //     }).catch(err => {
+        //         message.error(err.message)
+        //     })
+        //     await get(URL.URL_GET_DATA_STORE + `?type=brandCode`).then(res => {
+        //         setListBrand(res.data.result)
+        //     }).catch(err => {
+        //         message.error(err.message)
+        //     })
+        // }
+        // fetApi()
+
+    }, [])
     useEffect(() => {
         setYourChoice("")
         const fetApi = async () => {
@@ -282,7 +302,6 @@ export default function BrandCodeDash() {
             }
         }
     }
-
     const renderTitle = () => {
         let a = ""
         if (type === "service") {
@@ -295,6 +314,97 @@ export default function BrandCodeDash() {
         return `${a}: ${yourChoice ? yourChoice : "Please, chose something "}`
     }
 
+    // const onChange = (checkedValues) => {
+    //     setListType(checkedValues)
+    // }
+    // const [listType, setListType] = useState([])
+    // const [listService, setListService] = useState([])
+    // const [serviceChoice, setServiceChoice] = useState("")
+
+    // const [listStore, setListStore] = useState([])
+    // const [storeChoice, setStoreChoice] = useState("")
+
+    // const [listBrand, setListBrand] = useState([])
+    // const [brandChoice, setBrandChoice] = useState("")
+
+    // useEffect(() => {
+    //     if (listType.length !== 0) {
+    //         if (option1 === "week") {
+    //             setType1("week")
+    //             getFix(URL.URL_GET_CONCRETE_DATA2, {
+    //                 service: listType.includes("service") && serviceChoice,
+    //                 storeCode: listType.includes("storeCode") && storeChoice,
+    //                 brandCode: listType.includes("brandCode") && brandChoice,
+    //                 options: option1
+    //             })
+    //                 .then(res => {
+    //                     setSeries1(res.data.vuiSpending)
+    //                     setSeries2(res.data.vuiGiving)
+    //                     const currentDay = new Date()
+    //                     const arrCategories = []
+    //                     arrCategories.push(
+    //                         `${currentDay.getDate()}/${currentDay.getMonth() + 1
+    //                         }/${currentDay.getFullYear()}`
+    //                     )
+    //                     for (let i = 1; i <= 6; i++) {
+    //                         const newDay = new Date()
+    //                         newDay.setDate(currentDay.getDate() - i)
+    //                         arrCategories.unshift(
+    //                             `${newDay.getDate()}/${newDay.getMonth() + 1}/${newDay.getFullYear()}`
+    //                         )
+    //                     }
+    //                     setCategories(arrCategories)
+    //                 })
+    //                 .catch(err => {
+    //                     message.error(err.message)
+    //                 })
+    //         } else if (option2 === "all") {
+    //             setType1("day")
+    //             getFix(URL.URL_GET_CONCRETE_DATA2, {
+    //                 service: listType.includes("service") && serviceChoice,
+    //                 storeCode: listType.includes("storeCode") && storeChoice,
+    //                 brandCode: listType.includes("brandCode") && brandChoice,
+    //                 options: "day",
+    //                 day: option1
+    //             })
+    //                 .then(res => {
+    //                     setSeries1(res.data.vuiSpending)
+    //                     setSeries2(res.data.vuiGiving)
+    //                     setCategories(res.data.hourArray)
+    //                 })
+    //                 .catch(err => {
+    //                     message.error(err.message)
+    //                 })
+    //         } else {
+    //             setType1("hour")
+    //             getFix(URL.URL_GET_CONCRETE_DATA2, {
+    //                 service: listType.includes("service") && serviceChoice,
+    //                 storeCode: listType.includes("storeCode") && storeChoice,
+    //                 brandCode: listType.includes("brandCode") && brandChoice,
+    //                 options: "hour",
+    //                 day: option1,
+    //                 hour: option2
+    //             })
+    //                 .then(res => {
+    //                     setSeries1(res.data.vuiSpending)
+    //                     setSeries2(res.data.vuiGiving)
+    //                     const arr = new Array(60).fill(0)
+    //                     const cate = arr.map((value, key) => {
+    //                         return key
+    //                     })
+    //                     setCategories(cate)
+    //                 })
+    //                 .catch(err => {
+    //                     message.error(err.message)
+    //                 })
+    //         }
+    //     } else {
+    //         setSeries1([])
+    //         setSeries2([])
+    //         setCategories([])
+    //     }
+    // }, [listType, serviceChoice, storeChoice, brandChoice, option1, option2])
+
     return (
         <div>
             <Row className='match-height'>
@@ -304,6 +414,75 @@ export default function BrandCodeDash() {
                             <CardTitle style={{ fontSize: "2rem" }}> 🚀 {renderTitle()}</CardTitle>
                         </CardHeader>
                         <CardBody>
+                            {/* <div style={{ marginBottom: "15px" }}>
+                                <Checkbox.Group
+                                    style={{
+                                        width: '100%',
+                                    }}
+                                    value={listType}
+                                    onChange={onChange}
+                                >
+                                    <Row>
+                                        <Col style={{ marginBottom: "10px", display: "flex", justifyContent: "start", alignItems: "center" }} xl={12}>
+                                            <Checkbox style={{ fontWeight: "700", width: "100px" }} value="service">Service</Checkbox>
+                                            <Select
+                                                value={serviceChoice}
+                                                style={{
+                                                    width: 240,
+                                                    marginRight: "12px",
+                                                    fontSize: "16px"
+                                                }}
+                                                onChange={(value) => { setServiceChoice(value) }}
+                                            >
+                                                <Option value=""></Option>
+                                                {
+                                                    listService.map((value, key) => (
+                                                        <Option key={key} value={value._id}>{value._id}</Option>
+                                                    ))
+                                                }
+                                            </Select>
+                                        </Col>
+                                        <Col style={{ marginBottom: "10px" }} xl={12}>
+                                            <Checkbox style={{ fontWeight: "700", width: "100px" }} value="brandCode">Brand</Checkbox>
+                                            <Select
+                                                value={brandChoice}
+                                                style={{
+                                                    width: 240,
+                                                    marginRight: "12px",
+                                                    fontSize: "16px"
+                                                }}
+                                                onChange={(value) => { setBrandChoice(value) }}
+                                            >
+                                                <Option value=""></Option>
+                                                {
+                                                    listBrand.map((value, key) => (
+                                                        <Option key={key} value={value._id}>{value._id}</Option>
+                                                    ))
+                                                }
+                                            </Select>
+                                        </Col>
+                                        <Col style={{ marginBottom: "10px" }} xl={12}>
+                                            <Checkbox style={{ fontWeight: "700", width: "100px" }} value="storeCode">Store</Checkbox>
+                                            <Select
+                                                value={storeChoice}
+                                                style={{
+                                                    width: 240,
+                                                    marginRight: "12px",
+                                                    fontSize: "16px"
+                                                }}
+                                                onChange={(value) => { setStoreChoice(value) }}
+                                            >
+                                                <Option value=""></Option>
+                                                {
+                                                    listStore.map((value, key) => (
+                                                        <Option key={key} value={value._id}>{value._id}</Option>
+                                                    ))
+                                                }
+                                            </Select>
+                                        </Col>
+                                    </Row>
+                                </Checkbox.Group>
+                            </div> */}
                             <div style={{ marginBottom: "20px" }} className="flex justify-start">
                                 <Select
                                     value={type}

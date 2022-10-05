@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import ReactApexChart from 'react-apexcharts'
+import { useSelector } from 'react-redux'
 /*eslint-disable */
 
 export default function BalanceVUI(props) {
+    const skin = useSelector(state => state.layout.skin)
     const [series, setSeries] = useState([0, 0])
     useEffect(() => {
         setSeries([props.using.reduce((total, value) => total + value, 0), props.giving.reduce((total, value) => total + value, 0)])
@@ -35,24 +37,24 @@ export default function BalanceVUI(props) {
                     } else {
                         return "Giving VUI" + " - " + opts.w.globals.series[opts.seriesIndex]
                     }
-
+                },
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: undefined,
+                labels: {
+                    useSeriesColors: true
                 }
             },
             colors: ['#a0d911', "#ff4d4f"],
             title: {
-                text: 'Banlance VUI'
+                text: 'Banlance VUI',
+                style: {
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    fontFamily: undefined,
+                    color: skin === "dark" ? "white" : "black"
+                }
             },
-            // responsive: [{
-            //     breakpoint: 480,
-            //     options: {
-            //         chart: {
-            //             width: 200
-            //         },
-            //         legend: {
-            //             position: 'bottom'
-            //         }
-            //     }
-            // }]
         },
     };
     return (

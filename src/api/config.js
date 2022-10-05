@@ -10,7 +10,8 @@ const URL = {
   URL_GET_DATA_STORE: URL_SYSTEM_V1 + "/vui-coins/get-concrete-value",
   URL_GET_CONCRETE_DATA: URL_SYSTEM_V1 + "/vui-coins/get-concrete-data",
   URL_GET_TRANSACTIOM: URL_SYSTEM_V1 + "/vui-coins/get-transaction",
-  URL_GET_CONCRETE_TRANSACTION: URL_SYSTEM_V1 + "/vui-coins/get-concrete-transaction"
+  URL_GET_CONCRETE_TRANSACTION: URL_SYSTEM_V1 + "/vui-coins/get-concrete-transaction",
+  URL_GET_CONCRETE_DATA2: URL_SYSTEM_V1 + "/vui-coins/get-concrete-data-2"
 };
 
 export default URL;
