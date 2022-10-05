@@ -60,29 +60,56 @@ const TableVUI = (props) => {
         const splitRecord = record.date.split(" ");
         setShow(true)
         setSelected(record)
-        if (splitRecord.length === 1) {
-            // Day
-            get(URL.URL_GET_TRANSACTIOM + `?options=day&day=${splitRecord[0]}`).then(res => {
-                setSelectedData(res.data.result)
-            }).catch(err => {
-                message.error(err.message)
-            })
-        } else if (splitRecord[1].includes("h")) {
-            // Hour
-            get(URL.URL_GET_TRANSACTIOM + `?options=hour&day=${splitRecord[0]}&hour=${splitRecord[1].split(0, splitRecord[1].length - 2)}`).then(res => {
-                setSelectedData(res.data.result)
-            }).catch(err => {
-                message.error(err.message)
-            })
+        if (props.yourChoice) {
+            if (splitRecord.length === 1) {
+                // Day
+                get(URL.URL_GET_CONCRETE_TRANSACTION + `?dataType=${props.service}&value=${props.yourChoice}&options=day&day=${splitRecord[0]}`).then(res => {
+                    setSelectedData(res.data.result)
+                }).catch(err => {
+                    message.error(err.message)
+                })
+            } else if (splitRecord[1].includes("h")) {
+                // Hour
+                get(URL.URL_GET_CONCRETE_TRANSACTION + `?dataType=${props.service}&value=${props.yourChoice}&options=hour&day=${splitRecord[0]}&hour=${splitRecord[1].split(0, splitRecord[1].length - 2)}`).then(res => {
+                    setSelectedData(res.data.result)
+                }).catch(err => {
+                    message.error(err.message)
+                })
+            } else {
+                // Minutes
+                const splitTime = splitRecord[1].split(":")
+                get(URL.URL_GET_CONCRETE_TRANSACTION + `?dataType=${props.service}&value=${props.yourChoice}&options=minute&day=${splitRecord[0]}&hour=${splitTime[0]}&minute=${splitTime[1]}`).then(res => {
+                    setSelectedData(res.data.result)
+                }).catch(err => {
+                    message.error(err.message)
+                })
+            }
         } else {
-            // Minutes
-            const splitTime = splitRecord[1].split(":")
-            get(URL.URL_GET_TRANSACTIOM + `?options=minute&day=${splitRecord[0]}&hour=${splitTime[0]}&minute=${splitTime[1]}`).then(res => {
-                setSelectedData(res.data.result)
-            }).catch(err => {
-                message.error(err.message)
-            })
+            if (splitRecord.length === 1) {
+                // Day
+                get(URL.URL_GET_TRANSACTIOM + `?options=day&day=${splitRecord[0]}`).then(res => {
+                    setSelectedData(res.data.result)
+                }).catch(err => {
+                    message.error(err.message)
+                })
+            } else if (splitRecord[1].includes("h")) {
+                // Hour
+                get(URL.URL_GET_TRANSACTIOM + `?options=hour&day=${splitRecord[0]}&hour=${splitRecord[1].split(0, splitRecord[1].length - 2)}`).then(res => {
+                    setSelectedData(res.data.result)
+                }).catch(err => {
+                    message.error(err.message)
+                })
+            } else {
+                // Minutes
+                const splitTime = splitRecord[1].split(":")
+                get(URL.URL_GET_TRANSACTIOM + `?options=minute&day=${splitRecord[0]}&hour=${splitTime[0]}&minute=${splitTime[1]}`).then(res => {
+                    setSelectedData(res.data.result)
+                }).catch(err => {
+                    message.error(err.message)
+                })
+            }
         }
+
     }
 
     useEffect(() => {

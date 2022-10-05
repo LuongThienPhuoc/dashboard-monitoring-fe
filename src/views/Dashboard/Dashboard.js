@@ -72,9 +72,8 @@ export default function Dashboard() {
     const renderDay = async () => {
         const response = await get(URL.URL_GET_DATA_DAY + `?day=${option1}`)
         const arr = new Array(24).fill(0)
-        console.log(response)
-        // setSeries1(response.data.vuiSpending)
-        // setSeries2(response.vuiGiving)
+        setSeries1(response.data.vuiSpending)
+        setSeries2(response.data.vuiGiving)
         const cate = arr.map((value, key) => {
             return key
         })
@@ -86,8 +85,8 @@ export default function Dashboard() {
             URL.URL_GET_DATA_HOURS + `?day=${option1}&hour=${option2}`
         )
         const arr = new Array(60).fill(0)
-        setSeries1(response.vuiSpending)
-        setSeries2(response.vuiGiving)
+        setSeries1(response.data.vuiSpending)
+        setSeries2(response.data.vuiGiving)
         const cate = arr.map((value, key) => {
             return key
         })

@@ -241,7 +241,7 @@ export default function BrandCodeDash() {
 
     const renderTitle = () => {
         let a = ""
-        if (type) {
+        if (type === "service") {
             a = "Service"
         } else if (type === "brandCode") {
             a = "Brand"
@@ -344,6 +344,8 @@ export default function BrandCodeDash() {
                                 day={option1}
                                 hour={option2}
                                 giving={series2}
+                                service={type}
+                                yourChoice={yourChoice}
                                 categories={categories}
                             ></TableVUI>
                         </CardBody>
