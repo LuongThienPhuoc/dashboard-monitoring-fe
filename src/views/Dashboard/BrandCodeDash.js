@@ -16,6 +16,7 @@ import ReactApexChart from "react-apexcharts"
 import BalanceVUI from './components/BalanceVUI'
 import TableVUI from './components/TableVUI'
 import { useSelector } from 'react-redux'
+const Option = Select.Option
 
 export default function BrandCodeDash() {
     const skin = useSelector(state => state.layout.skin)

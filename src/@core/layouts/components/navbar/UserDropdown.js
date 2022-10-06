@@ -30,8 +30,6 @@ import { handleLogout } from "../../../../redux/authen"
 const UserDropdown = () => {
   const dispatch = useDispatch()
   const skin = useSelector(state => state.layout.skin)
-  console.log(34)
-  console.log(skin)
   return (
     <UncontrolledDropdown tag="li" className="dropdown-user nav-item">
       <DropdownToggle
