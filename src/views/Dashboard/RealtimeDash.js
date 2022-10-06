@@ -14,7 +14,6 @@ import {
 import BalanceVUI from "./components/BalanceVUI"
 import URL from "../../api/config"
 import { Select } from "antd"
-
 const Option = Select.Option
 /*eslint-disable */
 import { get } from "../../api/axios"
@@ -103,6 +102,7 @@ export default function RealtimeDash() {
         options: {
             chart: {
                 type: "area",
+                id: 'realtime',
                 stacked: false,
                 zoom: {
                     type: "x",
@@ -111,7 +111,14 @@ export default function RealtimeDash() {
                 },
                 toolbar: {
                     autoSelected: "zoom"
-                }
+                },
+                animations: {
+                    enabled: true,
+                    easing: 'linear',
+                    dynamicAnimation: {
+                        speed: 1000
+                    }
+                },
             },
             dataLabels: {
                 enabled: false
@@ -135,6 +142,22 @@ export default function RealtimeDash() {
                                 fontSize: "16px"
                             }
                         }
+                    },
+                    {
+                        y: 10000,
+                        y2: 50000,
+                        borderColor: '#000',
+                        fillColor: '#ffccc7',
+                        opacity: 0.2,
+                        label: {
+                            borderColor: '#333',
+                            style: {
+                                fontSize: '12px',
+                                color: '#333',
+                                background: '#ffa39e',
+                            },
+                            text: 'Danger',
+                        }
                     }
                 ],
                 xaxis: [
@@ -151,6 +174,28 @@ export default function RealtimeDash() {
                             }
                         }
                     }
+                ],
+                points: [{
+                    x: new Date('01 Dec 2017').getTime(),
+                    y: 400,
+                    marker: {
+                        size: 8,
+                        fillColor: '#fff',
+                        strokeColor: 'red',
+                        radius: 2,
+                        cssClass: 'apexcharts-custom-class'
+                    },
+                    label: {
+                        borderColor: '#FF4560',
+                        offsetY: 0,
+                        style: {
+                            color: '#fff',
+                            background: '#FF4560',
+                        },
+
+                        text: 'Point Annotation',
+                    }
+                }
                 ]
             },
             title: {

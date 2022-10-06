@@ -162,6 +162,22 @@ export default function Dashboard() {
                                 fontSize: "16px"
                             }
                         }
+                    },
+                    {
+                        y: 10000,
+                        y2: 50000,
+                        borderColor: '#000',
+                        fillColor: '#ffccc7',
+                        opacity: 0.2,
+                        label: {
+                            borderColor: '#333',
+                            style: {
+                                fontSize: '12px',
+                                color: '#333',
+                                background: '#ffa39e',
+                            },
+                            text: 'Danger',
+                        }
                     }
                 ],
                 xaxis: [
