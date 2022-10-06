@@ -25,6 +25,9 @@ export default function RealtimeDash() {
     const arr = new Array(168).fill(0)
     const [option, setOption] = useState(8)
     const socketRef = useRef()
+    const [series1, setSeries1] = useState([])
+    const [series2, setSeries2] = useState([])
+    const [categories, setCategories] = useState([])
     useEffect(() => {
         // Connect socket
         socketRef.current = socketIOClient.connect(host)
@@ -32,34 +35,16 @@ export default function RealtimeDash() {
             socketRef.current.emit("authenticate", { token: getAccessToken() })
         })
         socketRef.current.on("getData", (data) => {
-            let now = new Date().getTime() - 1000 * 60
-            let now1 = new Date(now)
-            let last = new Date(categories[categories.length - 1])
-
-            if (
-                now1.getSeconds() === last.getSeconds() &&
-                now1.getMinutes() === last.getMinutes() &&
-                now1.getHours() === last.getHours()
-            ) {
-                setSeries1((prev) => {
-                    prev[prev.length - 1] = data.vuiSpending
-                    return [...prev]
-                })
-                setSeries2((prev) => {
-                    prev[prev.length - 1] = data.vuiGiving
-                    return [...prev]
-                })
-            } else {
-                setSeries1((prev) => {
-                    return [...prev.slice(0), data.vuiSpending]
-                })
-                setSeries2((prev) => {
-                    return [...prev.slice(0), data.vuiGiving]
-                })
-                setCategories((prev) => {
-                    return [...prev.slice(0), now]
-                })
-            }
+            const now = new Date().getTime() - 1000 * 60
+            setSeries1((prev) => {
+                return [...prev.slice(0), data.vuiSpending]
+            })
+            setSeries2((prev) => {
+                return [...prev.slice(0), data.vuiGiving]
+            })
+            setCategories((prev) => {
+                return [...prev.slice(0), now]
+            })
         })
 
         //
@@ -72,9 +57,18 @@ export default function RealtimeDash() {
         const getAllData = () => {
             get(URL.URL_GET_ALL_DATA + `?time=${option}`)
                 .then((res) => {
-                    setCategories(res.data.arrCate)
-                    setSeries2(res.data.Giving)
-                    setSeries1(res.data.Using)
+                    let now = new Date()
+                    let lastElementDate = new Date(res.data.data[res.data.data.length - 1].time)
+                    if (now.getMinutes() === lastElementDate.getMinutes() && now.getHours() === lastElementDate.getHours && now.getDate() === lastElementDate.getDate()) {
+                        setCategories(res.data.arrCate.filter((value, key) => key !== res.data.arrCate.length - 1))
+                        setSeries2(res.data.Giving.filter((value, key) => key !== res.data.Giving.length - 1))
+                        setSeries1(res.data.Using.filter((value, key) => key !== res.data.Using.length - 1))
+                    } else {
+                        setCategories(res.data.arrCate)
+                        setSeries2(res.data.Giving)
+                        setSeries1(res.data.Using)
+                    }
+
                 })
                 .catch((err) => {
                     alert(err.message)
@@ -83,9 +77,7 @@ export default function RealtimeDash() {
         getAllData()
     }, [option])
 
-    const [series1, setSeries1] = useState([])
-    const [series2, setSeries2] = useState([])
-    const [categories, setCategories] = useState([])
+
     const series = [
         {
             name: "Using VUI",
@@ -116,7 +108,7 @@ export default function RealtimeDash() {
                     enabled: true,
                     easing: 'linear',
                     dynamicAnimation: {
-                        speed: 1000
+                        speed: 500
                     }
                 },
             },
